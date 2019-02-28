@@ -42,7 +42,6 @@ class HomeState extends State<Home>{
                 children: <Widget>[
                   new TextField(
                     controller: null,
-                    keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                       hintText: "Name",
                       icon: new Icon(Icons.person),
@@ -51,6 +50,7 @@ class HomeState extends State<Home>{
                 ],
               ),
             ),
+            //fixed key bord problem with Name field
             new Container(
               margin: const EdgeInsets.all(3.0),
               alignment: Alignment.center,
