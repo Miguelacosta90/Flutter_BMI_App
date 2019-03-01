@@ -37,7 +37,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("BMI"),
+        title: new Text("BMI Ninja"),
         centerTitle: true,
         backgroundColor: Colors.pinkAccent,
       ),
@@ -54,6 +54,7 @@ class HomeState extends State<Home> {
             ),
 
             // this is be for the input fields for users Information
+            //Name input field
             new Container(
               margin: const EdgeInsets.all(3.0),
               alignment: Alignment.center,
@@ -69,7 +70,7 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
-            //fixed key bord problem with Name field
+            //Height input field
             new Container(
               margin: const EdgeInsets.all(3.0),
               alignment: Alignment.center,
@@ -86,6 +87,7 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
+            //weight input field
             new Container(
               margin: const EdgeInsets.all(3.0),
               alignment: Alignment.center,
@@ -102,6 +104,7 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
+            //Age input field
             new Container(
               margin: const EdgeInsets.all(3.0),
               alignment: Alignment.center,
@@ -118,6 +121,7 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
+            //when user inputs all info Calculate button will display users BMI
             new Padding(padding: new EdgeInsets.all(10.5)),
             new Center(
               child: new Row(
@@ -130,6 +134,7 @@ class HomeState extends State<Home> {
                       color: Colors.pinkAccent,
                     ),
                   ),
+                  //clear button will clear all text
                   new Container(
                     margin: const EdgeInsets.only(left: 90.0),
                     child: new RaisedButton(
@@ -141,6 +146,7 @@ class HomeState extends State<Home> {
                 ],
               ),
             ),
+            //this will display the Text for the user
             new Padding(padding: new EdgeInsets.all(20.0)),
             new Column(
               mainAxisAlignment: MainAxisAlignment.center,
