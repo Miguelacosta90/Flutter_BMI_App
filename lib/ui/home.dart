@@ -14,7 +14,7 @@ class HomeState extends State<Home> {
   final TextEditingController _userAge = new TextEditingController();
   String _bmiOutPut = "";
   String _userInput = "";
-  void _Press() {
+  void _press() {
     setState(() {
       _userName.clear();
       _userHeight.clear();
@@ -22,15 +22,16 @@ class HomeState extends State<Home> {
       _userAge.clear();
     });
   }
+//  if(_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty && _userAge.text.isNotEmpty)
 
-  void _input(){
-    if(_userName.text.isNotEmpty){
-      _userInput = _userName.text;
-    }else if(_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty && _userAge.text.isNotEmpty){
-      _bmiOutPut = _userInput;
-    }else{
-      _bmiOutPut = "More Info";
-    }
+  void _nameInput(){
+    setState(() {
+      if(_userName.text.isNotEmpty){
+        _userInput = _userName.text;
+      }else{
+        _userInput = "Error";
+      }
+    });
   }
 
   @override
@@ -129,7 +130,7 @@ class HomeState extends State<Home> {
                   new Container(
                     margin: const EdgeInsets.only(left: 59.0),
                     child: new RaisedButton(
-                      onPressed: _input,
+                      onPressed: _nameInput,
                       child: const Text("Calculate"),
                       color: Colors.pinkAccent,
                     ),
@@ -138,7 +139,7 @@ class HomeState extends State<Home> {
                   new Container(
                     margin: const EdgeInsets.only(left: 90.0),
                     child: new RaisedButton(
-                      onPressed: _Press,
+                      onPressed: _press,
                       child: const Text("Clear"),
                       color: Colors.pinkAccent,
                     ),
