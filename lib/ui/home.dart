@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget{
+class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return new HomeState();
   }
-
 }
 
-class HomeState extends State<Home>{
-  String _pressing = 'test';
-  void _Press(){
+class HomeState extends State<Home> {
+  final TextEditingController _userName = new TextEditingController();
+  final TextEditingController _userHeight = new TextEditingController();
+  final TextEditingController _userWeight = new TextEditingController();
+  final TextEditingController _userAge = new TextEditingController();
+  String _bmiOutPut = "";
+  String _userInput = "";
+  void _Press() {
     setState(() {
-      debugPrint(_pressing);
+      _userName.clear();
+      _userHeight.clear();
+      _userWeight.clear();
+      _userAge.clear();
     });
   }
+
+  void _input(){
+    if(_userName.text.isNotEmpty){
+      _userInput = _userName.text;
+    }else if(_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty && _userAge.text.isNotEmpty){
+      _bmiOutPut = _userInput;
+    }else{
+      _bmiOutPut = "More Info";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -23,16 +41,17 @@ class HomeState extends State<Home>{
         centerTitle: true,
         backgroundColor: Colors.pinkAccent,
       ),
-
       body: new Container(
         alignment: Alignment.topCenter,
         child: new ListView(
           padding: const EdgeInsets.all(2.5),
           children: <Widget>[
             //this is to add our BMI LOGO
-            new Image.asset('img/bmilogo.png',
-            height: 133.1,
-            width: 200.1,),
+            new Image.asset(
+              'img/bmilogo.png',
+              height: 133.1,
+              width: 200.1,
+            ),
 
             // this is be for the input fields for users Information
             new Container(
@@ -41,7 +60,7 @@ class HomeState extends State<Home>{
               child: new Column(
                 children: <Widget>[
                   new TextField(
-                    controller: null,
+                    controller: _userName,
                     decoration: new InputDecoration(
                       hintText: "Name",
                       icon: new Icon(Icons.person),
@@ -57,7 +76,7 @@ class HomeState extends State<Home>{
               child: new Column(
                 children: <Widget>[
                   new TextField(
-                    controller: null,
+                    controller: _userHeight,
                     keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                       hintText: "Height",
@@ -73,7 +92,7 @@ class HomeState extends State<Home>{
               child: new Column(
                 children: <Widget>[
                   new TextField(
-                    controller: null,
+                    controller: _userWeight,
                     keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                       hintText: "Weight",
@@ -89,7 +108,7 @@ class HomeState extends State<Home>{
               child: new Column(
                 children: <Widget>[
                   new TextField(
-                    controller: null,
+                    controller: _userAge,
                     keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                       hintText: "Age",
@@ -104,23 +123,40 @@ class HomeState extends State<Home>{
               child: new Row(
                 children: <Widget>[
                   new Container(
-                    margin: const EdgeInsets.only(left:59.0),
+                    margin: const EdgeInsets.only(left: 59.0),
                     child: new RaisedButton(
-                      onPressed: () {
-                        debugPrint("test");
-                      },
+                      onPressed: _input,
                       child: const Text("Calculate"),
+                      color: Colors.pinkAccent,
+                    ),
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(left: 90.0),
+                    child: new RaisedButton(
+                      onPressed: _Press,
+                      child: const Text("Clear"),
                       color: Colors.pinkAccent,
                     ),
                   )
                 ],
               ),
-            )
-
+            ),
+            new Padding(padding: new EdgeInsets.all(20.0)),
+            new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text(
+                  "$_userInput Your BMI is, $_bmiOutPut",
+                  style: new TextStyle(
+                      color: Colors.pinkAccent,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
-
   }
 }
