@@ -12,8 +12,11 @@ class HomeState extends State<Home> {
   final TextEditingController _userHeight = new TextEditingController();
   final TextEditingController _userWeight = new TextEditingController();
   final TextEditingController _userAge = new TextEditingController();
-  String _bmiOutPut = "";
-  String _userInput = "";
+  String _bmiOutput;
+  String _userInput;
+  String _bmiInput;
+  double _calc;
+
   void _press() {
     setState(() {
       _userName.clear();
@@ -22,15 +25,24 @@ class HomeState extends State<Home> {
       _userAge.clear();
     });
   }
-//  if(_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty && _userAge.text.isNotEmpty)
 
-  void _nameInput(){
+  void _bmiMath() {
     setState(() {
-      if(_userName.text.isNotEmpty){
+      if (_userName.text.isNotEmpty) {
         _userInput = _userName.text;
-      }else{
-        _userInput = "Error";
+      } else {
+        _userInput = "";
       }
+
+
+    double _height = double.parse(_userHeight.text);
+    double _weight = double.parse(_userWeight.text);
+      if (_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty) {
+        _height = 12 * _height;
+        _calc = (_weight / (_height * _height)) * 703;
+        _bmiInput = _calc.toStringAsFixed(2);
+      }else
+        _bmiInput = "More info";
     });
   }
 
@@ -130,7 +142,7 @@ class HomeState extends State<Home> {
                   new Container(
                     margin: const EdgeInsets.only(left: 59.0),
                     child: new RaisedButton(
-                      onPressed: _nameInput,
+                      onPressed: _bmiMath,
                       child: const Text("Calculate"),
                       color: Colors.pinkAccent,
                     ),
@@ -153,7 +165,7 @@ class HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Text(
-                  "$_userInput Your BMI is, $_bmiOutPut",
+                  "$_userInput Your BMI is, $_bmiInput ",
                   style: new TextStyle(
                       color: Colors.pinkAccent,
                       fontSize: 25.0,
