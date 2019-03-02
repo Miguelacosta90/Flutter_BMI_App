@@ -12,7 +12,8 @@ class HomeState extends State<Home> {
   final TextEditingController _userHeight = new TextEditingController();
   final TextEditingController _userWeight = new TextEditingController();
   final TextEditingController _userAge = new TextEditingController();
-  String _bmiOutput;
+
+//  String _bmiOutput;
   String _userInput;
   String _bmiInput;
   double _calc;
@@ -28,21 +29,21 @@ class HomeState extends State<Home> {
 
   void _bmiMath() {
     setState(() {
+      double _height = double.parse(_userHeight.text);
+      double _weight = double.parse(_userWeight.text);
+      if (_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty) {
+        _height = 12 * _height;
+        _calc = (_weight / (_height * _height) * 703);
+        _bmiInput = _calc.toStringAsFixed(2);
+      } else {
+        _bmiInput = "More info";
+      }
+
       if (_userName.text.isNotEmpty) {
         _userInput = _userName.text;
       } else {
-        _userInput = "";
+        _userInput = "x";
       }
-
-
-    double _height = double.parse(_userHeight.text);
-    double _weight = double.parse(_userWeight.text);
-      if (_userHeight.text.isNotEmpty && _userWeight.text.isNotEmpty) {
-        _height = 12 * _height;
-        _calc = (_weight / (_height * _height)) * 703;
-        _bmiInput = _calc.toStringAsFixed(2);
-      }else
-        _bmiInput = "More info";
     });
   }
 
@@ -165,7 +166,7 @@ class HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Text(
-                  "$_userInput Your BMI is, $_bmiInput ",
+                  "$_userInput Your BMI is, $_bmiInput",
                   style: new TextStyle(
                       color: Colors.pinkAccent,
                       fontSize: 25.0,
